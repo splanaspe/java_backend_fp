@@ -43,9 +43,9 @@ target/
 /.nb-gradle/
 /src/test/java
 
-mvnw
-pom.xl
-mvnw.cmd
+.mvnw
+.pom.xl
+.mvnw.cmd
 
 # VS Code - Ignore Visual Studio Code files
 .vscode/
