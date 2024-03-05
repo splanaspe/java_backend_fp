@@ -1,0 +1,63 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven - Ignore Maven project/target folder
+target/
+!src/main/java/
+
+# Eclipse - Ignore Eclipse project files
+.classpath
+.project
+.settings/
+.springBeans
+
+# IntelliJ IDEA - Ignore IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+
+# NetBeans - Ignore NetBeans project files
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code - Ignore Visual Studio Code files
+.vscode/
+
+# STS - Ignore Spring Tool Suite files
+.sts4-cache/
+
+# Temporary files
+*.bak
+*.swp
+*.tmp
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
