@@ -41,6 +41,7 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
+/src/test/java
 
 # VS Code - Ignore Visual Studio Code files
 .vscode/
