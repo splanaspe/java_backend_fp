@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.main.restservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class AppBackendJavaApplicationTests {
 
-//	@Test
+	@Test
 	void contextLoads() {
 	}
 
