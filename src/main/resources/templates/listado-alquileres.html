@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de alquileres</title>
+</head>
+<body>
+    <h1>Listado de alquileres</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>fechaInicio</th>
+                <th>fechaFin</th>
+                <th>precio</th>
+                <th>vehiculo</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="alquiler : ${alquileres}">
+                <td th:text="${alquiler.fechaInicio}">fechaInicio del alquiler</td>
+                <td th:text="${alquiler.fechaFin}">fechaFin del alquiler</td>
+                <td th:text="${alquiler.precio}">precio del alquiler</td>
+                <td th:text="${alquiler.vehiculo}">vehiculo del alquiler</td>
+               
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
