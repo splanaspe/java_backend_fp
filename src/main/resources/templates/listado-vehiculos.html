@@ -8,6 +8,7 @@
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Matrícula</th>
@@ -17,6 +18,7 @@
         </thead>
         <tbody>
             <tr th:each="vehiculo : ${vehiculos}">
+                <td th:text="${vehiculo.idvehiculo}">idvehiculo del vehículo</td>
                 <td th:text="${vehiculo.marca}">Marca del vehículo</td>
                 <td th:text="${vehiculo.modelo}">Modelo del vehículo</td>
                 <td th:text="${vehiculo.matricula}">Matrícula del vehículo</td>
