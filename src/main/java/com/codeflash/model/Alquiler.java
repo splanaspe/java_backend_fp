@@ -3,9 +3,10 @@ package com.codeflash.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import org.springframework.data.annotation.Id;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -13,7 +14,8 @@ public class Alquiler {
 	 @Id
 	private String idalquiler;
 	 
-
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	 
 	 public Cliente getCliente() {
@@ -29,6 +31,8 @@ public class Alquiler {
 		this.vehiculo = vehiculo;
 	}
 	
+	@ManyToOne
+	@JoinColumn(name = "vehiculo_id")
 	private Vehiculo vehiculo;
 	 
 	private LocalDate fechaInicio;

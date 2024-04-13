@@ -14,7 +14,7 @@ public class ClienteController {
     @Autowired
     private ClienteRepository ClienteRepository;
     
-    @GetMapping("/clientes")
+    @RequestMapping(value = "/clientes", method = RequestMethod.GET)
     public String getAllCliente(Model model) {
     	List<Cliente> clientes = ClienteRepository.findAll();
 		model.addAttribute("clientes", clientes); 
@@ -32,6 +32,12 @@ public class ClienteController {
         Cliente cliente = ClienteRepository.findById(id).orElse(null);
         model.addAttribute("cliente", cliente);
         
+        return "cliente";
+    }
+    
+    @GetMapping("/nuevocliente")
+    public String nuevoCliente(Model model) {
+        model.addAttribute("cliente", new Cliente());
         return "cliente";
     }
 

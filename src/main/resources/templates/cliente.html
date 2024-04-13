@@ -7,11 +7,11 @@
 <body>
     <h1>Editar Cliente</h1>
     
-    <form th:if="${cliente.id != null}" th:action="@{/clientes/{id}(id=${cliente.id})}" method="put">
+    <form th:if="${cliente.idcliente != null}" th:action="@{/clientes/{idcliente}(idcliente=${cliente.idcliente})}" method="put">
     
-    	<input type="hidden" th:if="${cliente.id != null}" name="_method" value="PUT">
+    	<input type="hidden" th:if="${cliente.idcliente != null}" name="_method" value="PUT">
     <form th:unless="${cliente.id}" action="/clientes" method="post">
-    	<input type="hidden" th:unless="${cliente.id}" name="_method" value="POST">
+    	<input type="hidden" th:unless="${cliente.idcliente}" name="_method" value="POST">
     	
         <input type="hidden" name="_method" value="POST">
 		<label for="nombre">Nombre:</label>
