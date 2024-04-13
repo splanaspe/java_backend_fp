@@ -4,19 +4,15 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
-@Entity
+@Document
 public class Alquiler {
 	 @Id
 	private String idalquiler;
 	 
-	 
-	 @ManyToOne
-     @JoinColumn(name = "cliente_id")
+
 	private Cliente cliente;
 	 
 	 public Cliente getCliente() {
@@ -31,10 +27,8 @@ public class Alquiler {
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
-	@ManyToOne 
-	@JoinColumn(name = "vehiculo_id")
+	
 	private Vehiculo vehiculo;
-	 
 	 
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;

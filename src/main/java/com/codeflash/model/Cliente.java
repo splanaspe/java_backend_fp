@@ -1,12 +1,13 @@
 package com.codeflash.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+
+@Document
 public class Cliente {
 	@Id
-	private int idcliente;
+	private String idcliente;
 	
 	private String nombre;
 	private String apellido;
@@ -45,10 +46,10 @@ public class Cliente {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public int getIdcliente() {
+	public String getIdcliente() {
 		return idcliente;
 	}
-	public void setIdcliente(int idcliente) {
+	public void setIdcliente(String idcliente) {
 		this.idcliente = idcliente;
 	}
 	public String getNombre() {

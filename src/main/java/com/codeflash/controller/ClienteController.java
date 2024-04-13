@@ -5,27 +5,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
-
 @Controller
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
-    
+    private ClienteRepository ClienteRepository;
     
     @GetMapping("/clientes")
     public String getAllCliente(Model model) {
-    	List<Cliente> clientes = clienteRepository.findAll();
+    	List<Cliente> clientes = ClienteRepository.findAll();
 		model.addAttribute("clientes", clientes); 
         return "listado-clientes"; 
     }
 
-    @PostMapping
-    public Cliente createCliente(@RequestBody Cliente Cliente) {
-        return clienteRepository.save(Cliente);
+    @PostMapping("/clientes")
+    public RedirectView salvarCliente(Model model, @RequestBody Cliente cliente) {
+         ClienteRepository.save(cliente);
+         return new RedirectView("/clientes");
+    }
+    
+    @GetMapping("/clientes/{id}")
+    public String obtenerClientePorId(Model model, @PathVariable String id) {
+        Cliente cliente = ClienteRepository.findById(id).orElse(null);
+        model.addAttribute("cliente", cliente);
+        
+        return "cliente";
     }
 
-    // Otros métodos para manejar otras operaciones CRUD como GET por ID, PUT, DELETE, etc.
+    @DeleteMapping("/clientes/{id}")
+    public RedirectView borrarPorId(Model model, @PathVariable String id) {
+        Cliente cliente = ClienteRepository.findById(id).orElse(null);
+        ClienteRepository.delete(cliente);
+        return new RedirectView("/clientes");
+    }
+    
+    @PutMapping("/clientes/{id}")
+    public RedirectView actualizarCliente(Model model, @PathVariable String id, @RequestBody Cliente clienteActualizado) {
+    	Cliente clienteExistente = ClienteRepository.findById(id).orElse(null);
+        if (clienteExistente != null) {
+        	clienteExistente.setApellido(clienteActualizado.getApellido());
+        	clienteExistente.setDireccion(clienteActualizado.getDireccion());
+        	clienteExistente.setDocumento(clienteActualizado.getDocumento());
+        	clienteExistente.setEmail(clienteActualizado.getEmail());
+        	clienteExistente.setIdcliente(clienteActualizado.getIdcliente());
+        	clienteExistente.setNombre(clienteActualizado.getNombre());
+        	clienteExistente.setTelefono(clienteActualizado.getTelefono());
+            ClienteRepository.save(clienteExistente);
+        }
+        return new RedirectView("/clientes");
+    }
 }

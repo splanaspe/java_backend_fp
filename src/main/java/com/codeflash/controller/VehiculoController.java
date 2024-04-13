@@ -49,10 +49,8 @@ public class VehiculoController {
             vehiculoExistente.setMarca(vehiculoActualizado.getMarca());
             vehiculoExistente.setModelo(vehiculoActualizado.getModelo());
             vehiculoExistente.setMatricula(vehiculoActualizado.getMatricula());
-            // Actualiza otros atributos según sea necesario
             VehiculoRepository.save(vehiculoExistente);
         }
         return new RedirectView("/vehiculos");
     }
-    // Otros métodos para manejar otras operaciones CRUD como GET por ID, PUT, DELETE, etc.
 }

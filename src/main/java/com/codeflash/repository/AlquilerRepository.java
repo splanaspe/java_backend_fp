@@ -6,7 +6,7 @@ import com.codeflash.model.Alquiler;
 
 
 @Repository
-public interface AlquilerRepository extends MongoRepository<Alquiler, Long> {
+public interface AlquilerRepository extends MongoRepository<Alquiler, String> {
     
 	
 }
