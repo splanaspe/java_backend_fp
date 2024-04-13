@@ -1,9 +1,10 @@
 package com.codeflash.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import jakarta.persistence.Entity;
+
+@Entity
 public class Vehiculo {
 	 @Id
 	private int idvehiculo;
