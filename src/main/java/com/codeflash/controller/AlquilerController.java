@@ -1,6 +1,10 @@
 package com.codeflash.controller;
 import com.codeflash.model.Alquiler;
+import com.codeflash.model.Cliente;
 import com.codeflash.repository.AlquilerRepository;
+import com.codeflash.repository.ClienteRepository;
+import com.codeflash.repository.VehiculoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,12 @@ public class AlquilerController {
     @Autowired
     private AlquilerRepository AlquilerRepository;
     
+    @Autowired
+    private VehiculoRepository VehiculoRepository;
+    
+    @Autowired
+    private ClienteRepository ClienteRepository;
+    
     @GetMapping("/alquileres")
     public String getAllAlquiler(Model model) {
     	List<Alquiler> alquileres = AlquilerRepository.findAll();
@@ -22,7 +32,7 @@ public class AlquilerController {
     }
 
     @PostMapping("/alquileres")
-    public RedirectView salvarAlquiler(Model model, @RequestBody Alquiler alquiler) {
+    public RedirectView salvarAlquiler(Model model, @ModelAttribute Alquiler alquiler) {
          AlquilerRepository.save(alquiler);
          return new RedirectView("/alquileres");
     }
@@ -31,7 +41,17 @@ public class AlquilerController {
     public String obtenerAlquilerPorId(Model model, @PathVariable String id) {
         Alquiler alquiler = AlquilerRepository.findById(id).orElse(null);
         model.addAttribute("alquiler", alquiler);
+        model.addAttribute("vehiculos", VehiculoRepository.findAll()); 
+        model.addAttribute("clientes", ClienteRepository.findAll()); 
         
+        return "alquiler";
+    }
+    
+    @GetMapping("/nuevoalquiler")
+    public String nuevoAlquiler(Model model) {
+        model.addAttribute("alquiler", new Alquiler());
+        model.addAttribute("vehiculos", VehiculoRepository.findAll()); 
+        model.addAttribute("clientes", ClienteRepository.findAll()); 
         return "alquiler";
     }
 
@@ -42,14 +62,13 @@ public class AlquilerController {
         return new RedirectView("/alquileres");
     }
     
-    @PutMapping("/alquileres/{id}")
-    public RedirectView actualizarAlquiler(Model model, @PathVariable String id, @RequestBody Alquiler alquilerActualizado) {
+    @PostMapping("/alquileres/{id}")
+    public RedirectView actualizarAlquiler(Model model, @PathVariable String id, @ModelAttribute Alquiler alquilerActualizado) {
     	Alquiler alquilerExistente = AlquilerRepository.findById(id).orElse(null);
         if (alquilerExistente != null) {
         	alquilerExistente.setCliente(alquilerActualizado.getCliente());
         	alquilerExistente.setFechaFin(alquilerActualizado.getFechaFin());
         	alquilerExistente.setFechaInicio(alquilerActualizado.getFechaInicio());
-        	alquilerExistente.setIdalquiler(alquilerActualizado.getIdalquiler());
         	alquilerExistente.setPrecio(alquilerActualizado.getPrecio());
         	alquilerExistente.setVehiculo(alquilerActualizado.getVehiculo());
             AlquilerRepository.save(alquilerExistente);

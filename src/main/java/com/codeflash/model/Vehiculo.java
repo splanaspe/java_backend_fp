@@ -1,12 +1,18 @@
 package com.codeflash.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Vehiculo {
 	 @Id
-	private int idvehiculo;
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+	private String idvehiculo;
 	 
 	private String marca;
 	private String modelo;
@@ -14,10 +20,14 @@ public class Vehiculo {
 	private int capacidad;
 	private int color;
 	
-	public int getIdvehiculo() {
+	public boolean esNuevoVehiculo() {
+		return idvehiculo == null;
+	}
+	
+	public String getIdvehiculo() {
 		return idvehiculo;
 	}
-	public void setIdvehiculo(int idvehiculo) {
+	public void setIdvehiculo(String idvehiculo) {
 		this.idvehiculo = idvehiculo;
 	}
 	public String getMarca() {

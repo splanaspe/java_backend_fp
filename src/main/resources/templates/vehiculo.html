@@ -7,13 +7,8 @@
 <body>
     <h1>Editar Vehículo</h1>
     
-    <form th:if="${vehiculo.id != null}" th:action="@{/vehiculos/{id}(id=${vehiculo.id})}" method="put">
-    
-    	<input type="hidden" th:if="${vehiculo.id != null}" name="_method" value="PUT">
-    <form th:unless="${vehiculo.id}" action="/vehiculos" method="post">
-    	<input type="hidden" th:unless="${vehiculo.id}" name="_method" value="POST">
+    <form th:action="${vehiculo.esNuevoVehiculo() ? '/vehiculos': '/vehiculos/' + vehiculo.idvehiculo}" th:method="${vehiculo.esNuevoVehiculo() ? 'POST' : 'PUT'}">
     	
-        <input type="hidden" name="_method" value="POST">
         <label for="marca">Marca:</label>
         <input type="text" id="marca" name="marca" th:value="${vehiculo.marca}" required><br>
         
@@ -22,6 +17,12 @@
         
         <label for="matricula">Matrícula:</label>
         <input type="text" id="matricula" name="matricula" th:value="${vehiculo.matricula}" required><br>
+        
+        <label for="capacidad">Capacidad:</label>
+        <input type="text" id="capacidad" name="capacidad" th:value="${vehiculo.capacidad}" required><br>
+        
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" th:value="${vehiculo.color}" required><br>
         
         <button type="submit">Guardar cambios</button>
     </form>

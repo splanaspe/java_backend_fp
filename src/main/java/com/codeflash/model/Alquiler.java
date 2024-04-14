@@ -3,7 +3,11 @@ package com.codeflash.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,8 +16,14 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Alquiler {
 	 @Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
 	private String idalquiler;
 	 
+	public boolean esNuevoAlquiler() {
+		return idalquiler == null;
+	}
+	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;

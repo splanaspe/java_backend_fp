@@ -16,13 +16,14 @@ public class ClienteController {
     
     @RequestMapping(value = "/clientes", method = RequestMethod.GET)
     public String getAllCliente(Model model) {
+    	System.out.println("getAllCliente");
     	List<Cliente> clientes = ClienteRepository.findAll();
 		model.addAttribute("clientes", clientes); 
         return "listado-clientes"; 
     }
 
     @PostMapping("/clientes")
-    public RedirectView salvarCliente(Model model, @RequestBody Cliente cliente) {
+    public RedirectView salvarCliente(Model model, @ModelAttribute Cliente cliente) {
          ClienteRepository.save(cliente);
          return new RedirectView("/clientes");
     }
@@ -31,7 +32,7 @@ public class ClienteController {
     public String obtenerClientePorId(Model model, @PathVariable String id) {
         Cliente cliente = ClienteRepository.findById(id).orElse(null);
         model.addAttribute("cliente", cliente);
-        
+
         return "cliente";
     }
     
@@ -48,15 +49,14 @@ public class ClienteController {
         return new RedirectView("/clientes");
     }
     
-    @PutMapping("/clientes/{id}")
-    public RedirectView actualizarCliente(Model model, @PathVariable String id, @RequestBody Cliente clienteActualizado) {
+    @PostMapping("/clientes/{id}")
+    public RedirectView actualizarCliente(Model model, @PathVariable String id, @ModelAttribute Cliente clienteActualizado) {
     	Cliente clienteExistente = ClienteRepository.findById(id).orElse(null);
         if (clienteExistente != null) {
         	clienteExistente.setApellido(clienteActualizado.getApellido());
         	clienteExistente.setDireccion(clienteActualizado.getDireccion());
         	clienteExistente.setDocumento(clienteActualizado.getDocumento());
         	clienteExistente.setEmail(clienteActualizado.getEmail());
-        	clienteExistente.setIdcliente(clienteActualizado.getIdcliente());
         	clienteExistente.setNombre(clienteActualizado.getNombre());
         	clienteExistente.setTelefono(clienteActualizado.getTelefono());
             ClienteRepository.save(clienteExistente);

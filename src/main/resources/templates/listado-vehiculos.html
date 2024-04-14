@@ -5,6 +5,8 @@
 </head>
 <body>
     <h1>Listado de Vehículos</h1>
+    <a href="/nuevovehiculo">Nuevo Vehiculo</a>
+    <a href="/">Volver al menu principal</a>
     <table>
         <thead>
             <tr>
@@ -18,7 +20,7 @@
         </thead>
         <tbody>
             <tr th:each="vehiculo : ${vehiculos}">
-                <td th:text="${vehiculo.idvehiculo}">idvehiculo del vehículo</td>
+                <td><a th:href="${'/vehiculos/' + vehiculo.idvehiculo}" th:text="${vehiculo.idvehiculo}"></a></td>
                 <td th:text="${vehiculo.marca}">Marca del vehículo</td>
                 <td th:text="${vehiculo.modelo}">Modelo del vehículo</td>
                 <td th:text="${vehiculo.matricula}">Matrícula del vehículo</td>

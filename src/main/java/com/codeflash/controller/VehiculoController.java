@@ -1,4 +1,5 @@
 package com.codeflash.controller;
+import com.codeflash.model.Cliente;
 import com.codeflash.model.Vehiculo;
 import com.codeflash.repository.VehiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class VehiculoController {
     }
 
     @PostMapping("/vehiculos")
-    public RedirectView salvarVehiculo(Model model, @RequestBody Vehiculo vehiculo) {
+    public RedirectView salvarVehiculo(Model model, @ModelAttribute Vehiculo vehiculo) {
          VehiculoRepository.save(vehiculo);
          return new RedirectView("/vehiculos");
     }
@@ -34,6 +35,12 @@ public class VehiculoController {
         
         return "vehiculo";
     }
+    
+    @GetMapping("/nuevovehiculo")
+    public String nuevoVehiculo(Model model) {
+        model.addAttribute("vehiculo", new Vehiculo());
+        return "vehiculo";
+    }
 
     @DeleteMapping("/vehiculos/{id}")
     public RedirectView borrarPorId(Model model, @PathVariable String id) {
@@ -42,8 +49,8 @@ public class VehiculoController {
         return new RedirectView("/vehiculos");
     }
     
-    @PutMapping("/vehiculos/{id}")
-    public RedirectView actualizarVehiculo(Model model, @PathVariable String id, @RequestBody Vehiculo vehiculoActualizado) {
+    @PostMapping("/vehiculos/{id}")
+    public RedirectView actualizarVehiculo(Model model, @PathVariable String id, @ModelAttribute Vehiculo vehiculoActualizado) {
     	Vehiculo vehiculoExistente = VehiculoRepository.findById(id).orElse(null);
         if (vehiculoExistente != null) {
             vehiculoExistente.setMarca(vehiculoActualizado.getMarca());

@@ -5,22 +5,27 @@
 </head>
 <body>
     <h1>Listado de alquileres</h1>
+    <a href="/nuevoalquiler">Nuevo Alquiler</a>
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <th>fechaInicio</th>
                 <th>fechaFin</th>
                 <th>precio</th>
                 <th>vehiculo</th>
+                <th>cliente</th>
                
             </tr>
         </thead>
         <tbody>
             <tr th:each="alquiler : ${alquileres}">
+                <td><a th:href="${'/alquileres/' + alquiler.idalquiler}" th:text="${alquiler.idalquiler}"></a></td>
                 <td th:text="${alquiler.fechaInicio}">fechaInicio del alquiler</td>
                 <td th:text="${alquiler.fechaFin}">fechaFin del alquiler</td>
                 <td th:text="${alquiler.precio}">precio del alquiler</td>
-                <td th:text="${alquiler.vehiculo}">vehiculo del alquiler</td>
+                <td th:text="${alquiler.vehiculo.marca}">vehiculo del alquiler</td>
+                <td th:text="${alquiler.cliente.nombre}">cliente</td>
                
             </tr>
         </tbody>

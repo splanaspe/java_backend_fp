@@ -7,27 +7,23 @@
 <body>
     <h1>Editar Alquiler</h1>
     
-    <form th:if="${alquiler.id != null}" th:action="@{/alquilers/{id}(id=${alquiler.id})}" method="put">
-    
-    	<input type="hidden" th:if="${alquiler.id != null}" name="_method" value="PUT">
-    <form th:unless="${alquiler.id}" action="/alquilers" method="post">
-    	<input type="hidden" th:unless="${alquiler.id}" name="_method" value="POST">
+    <form th:action="${alquiler.esNuevoAlquiler() ? '/alquileres' : '/alquileres/' + alquiler.idalquiler}" th:method="${alquiler.esNuevoAlquiler() != null ? 'POST': 'PUT'}">
     	
 		<label for="cliente">Cliente:</label>
         <select id="cliente" name="cliente" required>
-            <option th:each="cliente : ${clientes}" th:value="${cliente.idcliente}" th:text="${cliente.nombre + ' ' + cliente.apellido}" th:selected="${cliente.idcliente == alquiler.cliente.idcliente}"></option>
+            <option th:each="cliente : ${clientes}" th:value="${cliente.idcliente}" th:text="${cliente.nombre + ' ' + cliente.apellido}" th:selected="${alquiler.cliente != null && cliente.idcliente == alquiler.cliente.idcliente}"></option>
         </select><br>
         
         <label for="vehiculo">Vehículo:</label>
         <select id="vehiculo" name="vehiculo" required>
-            <option th:each="vehiculo : ${vehiculos}" th:value="${vehiculo.id}" th:text="${vehiculo.marca + ' ' + vehiculo.modelo}" th:selected="${vehiculo.id == alquiler.vehiculo.id}"></option>
+            <option th:each="vehiculo : ${vehiculos}" th:value="${vehiculo.idvehiculo}" th:text="${vehiculo.marca + ' ' + vehiculo.modelo}" th:selected="${alquiler.vehiculo != null && vehiculo.idvehiculo == alquiler.vehiculo.idvehiculo}"></option>
         </select><br>
         
         <label for="fechaInicio">Fecha de Inicio:</label>
-        <input type="date" id="fechaInicio" name="fechaInicio" th:value="${#dates.format(alquiler.fechaInicio, 'yyyy-MM-dd')}" required><br>
+        <input type="date" id="fechaInicio" name="fechaInicio" th:value="${#temporals.format(alquiler.fechaInicio, 'yyyy-MM-dd')}" required><br>
         
         <label for="fechaFin">Fecha de Fin:</label>
-        <input type="date" id="fechaFin" name="fechaFin" th:value="${#dates.format(alquiler.fechaFin, 'yyyy-MM-dd')}" required><br>
+        <input type="date" id="fechaFin" name="fechaFin" th:value="${#temporals.format(alquiler.fechaFin, 'yyyy-MM-dd')}" required><br>
         
         <label for="precio">Precio:</label>
         <input type="number" id="precio" name="precio" min="0" step="0.01" th:value="${alquiler.precio}" required><br>

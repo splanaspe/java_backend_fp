@@ -1,12 +1,18 @@
 package com.codeflash.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
 @Entity
 public class Cliente {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
 	private String idcliente;
 	
 	private String nombre;
@@ -16,6 +22,9 @@ public class Cliente {
 	private String email;
 	private String direccion;
 	
+	public boolean esNuevoCliente() {
+		return idcliente == null;
+	}
 	public String getApellido() {
 		return apellido;
 	}

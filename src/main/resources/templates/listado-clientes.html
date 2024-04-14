@@ -6,6 +6,7 @@
 <body>
     <h1>Listado de clientes</h1>
     <a href="/nuevocliente">Nuevo Cliente</a>
+    <a href="/">Volver al menu principal</a>
     <table>
         <thead>
             <tr>
@@ -19,7 +20,7 @@
         </thead>
         <tbody>
             <tr th:each="cliente : ${clientes}">
-                <td><a href="/clientes/${cliente.idcliente}" th:text="${cliente.idcliente}"></a></td>
+                <td><a th:href="${'/clientes/' + cliente.idcliente}" th:text="${cliente.idcliente}"></a></td>
                 <td th:text="${cliente.nombre}">nombre del cliente</td>
                 <td th:text="${cliente.apellido}">apellido del cliente</td>
                 <td th:text="${cliente.documento}">documento del cliente</td>
